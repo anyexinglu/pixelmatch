@@ -1,6 +1,9 @@
 # 如何调试
 
-直接在 vscode 中点运行启动程序 即可，因为.vscode 配置了以 app.js 为入口。
+- clone 项目
+- yarn
+- 直接在 vscode 中点运行启动程序 即可，因为.vscode 配置了以 app.js 为入口。
+
 想调试单测，也可以将.vscode/launch.json 中的"program"改成"\${workspaceFolder}/test/test.js"再运行。
 
 ## pixelmatch

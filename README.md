@@ -1,4 +1,9 @@
-# pixelmatch
+# 如何调试
+
+直接在 vscode 中点运行启动程序 即可，因为.vscode 配置了以 app.js 为入口。
+想调试单测，也可以将.vscode/launch.json 中的"program"改成"\${workspaceFolder}/test/test.js"再运行。
+
+## pixelmatch
 
 [![Build Status](https://travis-ci.org/mapbox/pixelmatch.svg?branch=master)](https://travis-ci.org/mapbox/pixelmatch)
 [![](https://img.shields.io/badge/simply-awesome-brightgreen.svg)](https://github.com/mourner/projects)
@@ -16,7 +21,9 @@ has **no dependencies**, and works on **raw typed arrays** of image data,
 so it's **blazing fast** and can be used in **any environment** (Node or browsers).
 
 ```js
-const numDiffPixels = pixelmatch(img1, img2, diff, 800, 600, {threshold: 0.1});
+const numDiffPixels = pixelmatch(img1, img2, diff, 800, 600, {
+  threshold: 0.1
+});
 ```
 
 Implements ideas from the following papers:
@@ -28,8 +35,8 @@ Implements ideas from the following papers:
 
 ## Example output
 
-| expected | actual | diff |
-| --- | --- | --- |
+| expected                  | actual                    | diff                              |
+| ------------------------- | ------------------------- | --------------------------------- |
 | ![](test/fixtures/4a.png) | ![](test/fixtures/4b.png) | ![1diff](test/fixtures/4diff.png) |
 | ![](test/fixtures/3a.png) | ![](test/fixtures/3b.png) | ![1diff](test/fixtures/3diff.png) |
 | ![](test/fixtures/6a.png) | ![](test/fixtures/6b.png) | ![1diff](test/fixtures/6diff.png) |
@@ -66,18 +73,18 @@ pixelmatch image1.png image2.png output.png 0.1
 ### Node.js
 
 ```js
-const fs = require('fs');
-const PNG = require('pngjs').PNG;
-const pixelmatch = require('pixelmatch');
+const fs = require("fs");
+const PNG = require("pngjs").PNG;
+const pixelmatch = require("pixelmatch");
 
-const img1 = PNG.sync.read(fs.readFileSync('img1.png'));
-const img2 = PNG.sync.read(fs.readFileSync('img2.png'));
-const {width, height} = img1;
-const diff = new PNG({width, height});
+const img1 = PNG.sync.read(fs.readFileSync("img1.png"));
+const img2 = PNG.sync.read(fs.readFileSync("img2.png"));
+const { width, height } = img1;
+const diff = new PNG({ width, height });
 
-pixelmatch(img1.data, img2.data, diff.data, width, height, {threshold: 0.1});
+pixelmatch(img1.data, img2.data, diff.data, width, height, { threshold: 0.1 });
 
-fs.writeFileSync('diff.png', PNG.sync.write(diff));
+fs.writeFileSync("diff.png", PNG.sync.write(diff));
 ```
 
 ### Browsers
@@ -87,7 +94,7 @@ const img1 = img1Context.getImageData(0, 0, width, height);
 const img2 = img2Context.getImageData(0, 0, width, height);
 const diff = diffContext.createImageData(width, height);
 
-pixelmatch(img1.data, img2.data, diff.data, width, height, {threshold: 0.1});
+pixelmatch(img1.data, img2.data, diff.data, width, height, { threshold: 0.1 });
 
 diffContext.putImageData(diff, 0, 0);
 ```
